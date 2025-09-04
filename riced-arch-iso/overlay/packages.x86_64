@@ -1,0 +1,51 @@
+# Base
+base
+linux
+linux-firmware
+networkmanager
+sudo
+vim
+git
+zsh
+
+# Hyprland stack
+hyprland
+xdg-desktop-portal-hyprland
+xdg-desktop-portal-gtk
+waybar
+wofi
+kitty
+swww
+wl-clipboard
+grim
+slurp
+polkit-gnome
+xdg-user-dirs
+
+# Theming
+pipewire
+pipewire-alsa
+pipewire-pulse
+wireplumber
+ttf-jetbrains-mono-nerd
+ttf-nerd-fonts-symbols
+ttf-dejavu
+papirus-icon-theme
+qt5-wayland
+qt6-wayland
+gtk-engine-murrine
+lxappearance
+
+# Utils
+neovim
+htop
+btop
+curl
+wget
+rsync
+zip
+unzip
+bind-tools
+inetutils
+fastfetch
+
