@@ -1,0 +1,27 @@
+{
+  // Minimal Catppuccin-like waybar
+  "layer": "top",
+  "position": "top",
+  "height": 28,
+  "modules-left": ["hyprland/workspaces"],
+  "modules-center": ["clock"],
+  "modules-right": ["pulseaudio", "network", "battery", "tray"],
+  "clock": {
+    "format": "{:%a %b %d  %H:%M}"
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "",
+    "format-icons": ["", "", ""]
+  },
+  "battery": {
+    "format": "{icon} {capacity}%",
+    "format-icons": ["", "", "", "", ""]
+  },
+  "network": {
+    "format-wifi": "  {essid}",
+    "format-ethernet": "  {ifname}",
+    "format-disconnected": ""
+  }
+}
+
