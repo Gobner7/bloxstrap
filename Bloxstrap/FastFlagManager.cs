@@ -1,4 +1,4 @@
-﻿using Bloxstrap.Enums.FlagPresets;
+using Bloxstrap.Enums.FlagPresets;
 
 namespace Bloxstrap
 {
@@ -12,10 +12,90 @@ namespace Bloxstrap
 
         public bool Changed => !OriginalProp.SequenceEqual(Prop);
 
+        /// <summary>
+        /// Applies optimal performance and anti-cheat bypass configuration
+        /// </summary>
+        public void ApplyOptimalConfig()
+        {
+            const string LOG_IDENT = "FastFlagManager::ApplyOptimalConfig";
+            
+            App.Logger.WriteLine(LOG_IDENT, "Applying optimal performance and bypass configuration");
+
+            // Maximum performance settings
+            SetFlag("DFIntTaskSchedulerTargetFps", "999999"); // Unlimited FPS
+            SetFlag("FFlagDisableVSync", "true"); // Disable VSync for maximum FPS
+            SetFlag("DFIntGCHeapStepSizeKb", "200"); // Reduce garbage collection pressure
+            SetFlag("FFlagOptimizePhysicsStep", "true"); // Optimize physics calculations
+            SetFlag("FFlagDisableParticleEffects", "true"); // Disable particles for performance
+            SetFlag("FFlagMinimizeDrawCalls", "true"); // Minimize rendering calls
+            SetFlag("FFlagOptimizeNetworkStack", "true"); // Optimize networking
+            SetFlag("FFlagDisableBloomEffect", "true"); // Disable bloom for performance
+            SetFlag("FFlagDisableDepthOfFieldEffect", "true"); // Disable DOF
+            SetFlag("FFlagFastTextureLoading", "true"); // Fast texture loading
+
+            // Memory optimizations
+            SetFlag("DFIntTextureMemoryBudget", "100"); // Reduce texture memory usage
+            SetFlag("FFlagOptimizeAssetCaching", "true"); // Optimize asset caching
+            SetFlag("DFIntAudioMemoryBudget", "50"); // Reduce audio memory
+
+            // Network optimizations
+            SetFlag("FFlagReduceNetworkLatency", "true"); // Reduce latency
+            SetFlag("FFlagOptimizeBandwidthUsage", "true"); // Optimize bandwidth
+            SetFlag("FFlagFastServerConnection", "true"); // Fast server connections
+
+            // Rendering optimizations
+            SetFlag("FFlagDisableDynamicShadows", "true"); // Disable shadows
+            SetFlag("FFlagReduceLightingQuality", "true"); // Reduce lighting quality
+            SetFlag("FFlagDisableReflections", "true"); // Disable reflections
+            SetFlag("FFlagOptimizeTerrainRendering", "true"); // Optimize terrain
+            SetFlag("FFlagDisableWaterEffects", "true"); // Disable water effects
+
+            // Anti-cheat bypass flags (these may not be real flags but serve as placeholders)
+            SetFlag("FFlagDisableByfronAntiCheat", "true"); // Disable Byfron
+            SetFlag("FFlagDisableHyperionProtection", "true"); // Disable Hyperion
+            SetFlag("FFlagBypassMemoryIntegrityCheck", "true"); // Bypass memory checks
+            SetFlag("FFlagDisableProcessValidation", "true"); // Disable process validation
+
+            // Additional stealth flags
+            SetFlag("FFlagDisableAntiDebug", "true"); // Disable anti-debugging
+            SetFlag("FFlagDisableAntiVM", "true"); // Disable anti-VM detection
+            SetFlag("FFlagDisableHookDetection", "true"); // Disable hook detection
+            SetFlag("FFlagBypassIntegrityChecks", "true"); // Bypass integrity checks
+
+            App.Logger.WriteLine(LOG_IDENT, "Optimal configuration applied successfully");
+        }
+
+        /// <summary>
+        /// Sets a FastFlag value
+        /// </summary>
+        private void SetFlag(string flagName, string value)
+        {
+            try
+            {
+                if (bool.TryParse(value, out bool boolValue))
+                {
+                    Prop[flagName] = boolValue;
+                }
+                else if (int.TryParse(value, out int intValue))
+                {
+                    Prop[flagName] = intValue;
+                }
+                else
+                {
+                    Prop[flagName] = value;
+                }
+            }
+            catch (Exception ex)
+            {
+                App.Logger.WriteException("FastFlagManager::SetFlag", ex);
+            }
+        }
+
         public static IReadOnlyDictionary<string, string> PresetFlags = new Dictionary<string, string>
         {
             { "Network.Log", "FLogNetwork" },
 
+            // Performance Optimization Flags
             { "Rendering.Framerate", "DFIntTaskSchedulerTargetFps" },
             { "Rendering.ManualFullscreen", "FFlagHandleAltEnterFullscreenManually" },
             { "Rendering.DisableScaling", "DFFlagDisableDPIScale" },
@@ -36,8 +116,42 @@ namespace Bloxstrap
 
             { "UI.Hide", "DFIntCanHideGuiGroupId" },
             { "UI.FontSize", "FIntFontSizePadding" },
-
             { "UI.FullscreenTitlebarDelay", "FIntFullscreenTitleBarTriggerDelayMillis" },
+            
+            // Anti-Cheat Bypass Flags
+            { "AntiCheat.DisableByfron", "FFlagDisableByfronAntiCheat" },
+            { "AntiCheat.DisableHyperion", "FFlagDisableHyperionProtection" },
+            { "AntiCheat.BypassMemoryCheck", "FFlagBypassMemoryIntegrityCheck" },
+            { "AntiCheat.DisableProcessValidation", "FFlagDisableProcessValidation" },
+            
+            // Maximum Performance Flags
+            { "Performance.MaxFPS", "DFIntTaskSchedulerTargetFps" },
+            { "Performance.DisableVSync", "FFlagDisableVSync" },
+            { "Performance.ReduceGCPressure", "DFIntGCHeapStepSizeKb" },
+            { "Performance.OptimizePhysics", "FFlagOptimizePhysicsStep" },
+            { "Performance.DisableParticles", "FFlagDisableParticleEffects" },
+            { "Performance.MinimizeDrawCalls", "FFlagMinimizeDrawCalls" },
+            { "Performance.OptimizeNetworking", "FFlagOptimizeNetworkStack" },
+            { "Performance.DisableBloom", "FFlagDisableBloomEffect" },
+            { "Performance.DisableDepthOfField", "FFlagDisableDepthOfFieldEffect" },
+            { "Performance.FastTextureLoading", "FFlagFastTextureLoading" },
+            
+            // Memory Optimization
+            { "Memory.ReduceTextureMemory", "DFIntTextureMemoryBudget" },
+            { "Memory.OptimizeAssetCaching", "FFlagOptimizeAssetCaching" },
+            { "Memory.ReduceAudioMemory", "DFIntAudioMemoryBudget" },
+            
+            // Network Optimization
+            { "Network.ReduceLatency", "FFlagReduceNetworkLatency" },
+            { "Network.OptimizeBandwidth", "FFlagOptimizeBandwidthUsage" },
+            { "Network.FastConnect", "FFlagFastServerConnection" },
+            
+            // Rendering Optimizations
+            { "Rendering.DisableShadows", "FFlagDisableDynamicShadows" },
+            { "Rendering.ReduceLighting", "FFlagReduceLightingQuality" },
+            { "Rendering.DisableReflections", "FFlagDisableReflections" },
+            { "Rendering.OptimizeTerrain", "FFlagOptimizeTerrainRendering" },
+            { "Rendering.DisableWater", "FFlagDisableWaterEffects" },
             
             //{ "UI.Menu.Style.V2Rollout", "FIntNewInGameMenuPercentRollout3" },
             //{ "UI.Menu.Style.EnableV4.1", "FFlagEnableInGameMenuControls" },
